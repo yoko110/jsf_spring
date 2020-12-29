@@ -30,7 +30,6 @@ public class Todo {
 
 	public Date getDeadline() {
 		System.out.println("Todo.getDeadline()" + deadline);
-
 		return deadline;
 	}
 
