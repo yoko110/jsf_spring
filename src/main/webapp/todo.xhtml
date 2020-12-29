@@ -1,0 +1,64 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>TO-DO application</title>
+    </h:head>
+    <h:body>
+        <div>
+            <div>
+                ToDoを追加しましょう
+            </div>
+            <h:dataTable value="#{todoService.allTodo}" var="item">
+ 				<h:column>
+	    			<f:facet name="header">
+  	    			<h:outputText value="No"/>
+  		  			</f:facet>
+  		  			<h:outputText value="#{item.id}"/>
+  				</h:column>
+ 				<h:column>
+                    <div style="display:block; float:left; width:60px"></div>
+  				</h:column>  				
+ 				<h:column>
+	    			<f:facet name="header">
+  	    			<h:outputText value="やること"/>
+  		  			</f:facet>
+  		  			<h:outputText value="#{item.message}"/>
+  				</h:column>
+ 				<h:column>
+                    <div style="display:block; float:left; width:60px"></div>
+  				</h:column>  				  				
+	  			<h:column>
+    				<f:facet name="header">
+      				<h:outputText value="期限" style="display:block; float:left"/>
+	    			</f:facet>
+    				<h:outputText value="#{item.deadline}"><f:convertDateTime  pattern="yyyy年MM月dd日"/></h:outputText> 
+ 	 			</h:column>
+            </h:dataTable>
+        </div>
+        <div><br></br><br></br><br></br><br></br><br></br>
+            <div>
+                New:
+            </div>
+            <h:form>     
+	            <h:panelGrid columns="8">     
+    	            <h:outputLabel for="message" value="やること"/>
+ 	　               <h:inputText id="message" value="#{todoService.todo.message}"/>
+    	            <div style="display:block; float:left; width:60px"></div>
+  	                <h:outputLabel for="deadline" value="期限"/>
+                    <h:inputText id="deadline" value="#{todoService.todo.deadline}" style="width:80px"><f:convertDateTime  pattern="yyyyMMdd"/> </h:inputText>(yyyyMMdd)
+                	<h:commandButton value="Save" action="#{todoService.save}"/>
+            	</h:panelGrid>
+            </h:form>
+            <h:form>  
+            	<h:panelGrid columns="3">        
+                	<h:outputLabel for="id" value="削除"/>
+                	<h:inputText id="id" value="#{todoService.todo.id}" style="width:60px"/>
+                	<h:commandButton value="Delete" action="#{todoService.delete}"/>
+                </h:panelGrid>	
+            </h:form>            
+        </div>
+    </h:body>
+</f:view>
