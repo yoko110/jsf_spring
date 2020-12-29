@@ -22,26 +22,20 @@ public class TodoDao implements Dao<Todo> {
 
 	@Override
 	public Collection<Todo> getAll() {
-		System.out.println("TodoDao.getAll()");
-		System.out.println("return" + todoList.stream().filter(Objects::nonNull)
-				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList)));
 		return todoList.stream().filter(Objects::nonNull)
 				.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
 	}
 
 	@Override
 	public int save(Todo todo) {
-		System.out.println("TodoDao.save()");
 		todoList.add(todo);
 		int index = todoList.size();
-		System.out.println("TodoDao.index" + index);
 		todo.setId(index);
 		return index;
 	}
 
 	@Override
 	public void delete(Todo todo) {
-		System.out.println("TodoDao.delete()");
 		todoList.set(todo.getId() - 1, null);
 	}
 
